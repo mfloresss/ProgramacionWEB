@@ -33,16 +33,14 @@ public class App {
 
                     boolean mailValid = false;
 
-                    if (!mail.isEmpty()) {
-                        while (!mailValid) {
-                            if (!mail.contains("@")) {
-                                System.out.println("Ingrese un mail valido");
-                                mail = tec.next();
-                            } else {
-                                mailValid = true;
-                                System.out.println("Contacto ingresado!");
-                            }
+                    if (mail.isEmpty()) {
+                        System.out.println("No ha ingresado un mail");
+                    } else {
+                        while (!mail.contains("@")) {
+                            System.out.println("Ingrese un mail valido:");
+                            mail = tec.next();
                         }
+                        System.out.println("Contacto ingresado!");
                     }
 
                     if (contacto.size() <= MAX_CONTACT) {
