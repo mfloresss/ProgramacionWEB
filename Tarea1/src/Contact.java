@@ -1,9 +1,9 @@
 public class Contact {
-    String nombre;
-    int numero;
-    String mail;
+    private String nombre;
+    private String numero;
+    private String mail;
 
-    public Contact(String nombre, int numero, String mail) {
+    public Contact(String nombre, String numero, String mail) {
         this.nombre = nombre;
         this.numero = numero;
         this.mail = mail;
@@ -17,11 +17,11 @@ public class Contact {
         this.nombre = nombre;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
