@@ -7,7 +7,8 @@ public class App {
     public static void main(String[] args) throws Exception {
         final int MAX_CONTACT = 256;
 
-        String name, email, num, opc;
+        String name, email, num;
+        char opc;
 
         Scanner tec = new Scanner(System.in);
 
@@ -17,69 +18,63 @@ public class App {
             System.out.println("==============================================\n\n"
                     + " 1 - Ingresar un nuevo contacto\n\n"
                     + " 2 - Consultar un contacto existente\n\n"
+                    + " 3 - Salir\n\n"
                     + "==============================================");
 
-            opc = tec.nextLine();
+            opc = tec.nextLine().charAt(0);
 
             switch (opc) {
-                case "1":
-                    System.out.print("\n> Ingrese su nombre: ");
-                    do {
-                        name = tec.nextLine();
-                    } while (!checkName(name));
-
-                    System.out.print("\n> Ingrese su numero: ");
-                    do {
-                        num = tec.nextLine();
-                    } while (!checkNumber(num));
-
-                    System.out.print("\n> Ingrese su email (o presione enter si no lo sabe): ");
-                    do {
-                        email = tec.nextLine();
-                    } while (!checkEmail(email));
-
+                case '1':
                     if (contacts.size() < MAX_CONTACT) {
+                        System.out.print("\n> Ingrese su nombre: ");
+                        do {
+                            name = tec.nextLine();
+                        } while (!checkName(name));
+
+                        System.out.print("\n> Ingrese su numero: ");
+                        do {
+                            num = tec.nextLine();
+                        } while (!checkNumber(num));
+
+                        System.out.print("\n> Ingrese su email (o presione enter si no lo sabe): ");
+                        do {
+                            email = tec.nextLine();
+                        } while (!checkEmail(email));
+
                         contacts.add(new Contact(name, num, email));
-                        System.out.println("\n> Contacto ingresado correctamente\n");
+                        System.out.println("\n> Contacto ingresado correctamente \n");
                         Thread.sleep(1000);
                     } else {
-                        System.out.println("\n> Se llego al limite de contactos para agregar");
+                        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"
+                                + "SE LLEGO AL LIMITES DE CONTACTOS PARA AGREGAR"
+                                + "\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                         Thread.sleep(1000);
                     }
-
                     break;
 
-                case "2":
+                case '2':
                     System.out.print("\n> Ingresa el nombre del contacto: ");
                     name = tec.nextLine().toLowerCase();
+                    getContact(name, contacts);
 
-                    for (int i = 0; i < contacts.size(); i++) {
-                        // if (contacts.get(i).getNombre().equals(name)) {
-                        // Uso .contains para que te surgiera contactos que contengan el string
-                        // ingresado.
-                        if (contacts.get(i).getNombre().toLowerCase().contains(name)) {
-                            System.out.println("\nNombre: " + contacts.get(i).getNombre() + "\n\n"
-                                    + "Telefono: " + contacts.get(i).getNumero() + "\n");
-                            System.out.println(contacts.get(i).getMail().isEmpty() ? "No tiene mail\n"
-                                    : "Correo: " + contacts.get(i).getMail() + "\n");
-                        } else {
-                            if (i == contacts.size() - 1) {
-                                System.out.println("El contacto " + name + " no existe");
-                                Thread.sleep(1000);
-                            }
-                        }
-                    }
+                    Thread.sleep(1000);
+                    break;
+
+                case '3':
+                    System.out.println("==============================================\n\n"
+                            + "               NOS VEMOS!!!\n\n"
+                            + "==============================================");
                     Thread.sleep(1000);
                     break;
 
                 default:
-                    System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"
+                    System.out.println("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"
                             + "               OPCION INVALIDA"
-                            + "\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                            + "\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
                     Thread.sleep(1000);
                     break;
             }
-        } while (opc != "0");
+        } while (opc != '3');
 
     }
 
@@ -125,6 +120,27 @@ public class App {
             } else {
                 System.out.print("\n> Debe ingresar un numero valido: ");
                 return false;
+            }
+        }
+    }
+
+    public static void getContact(String name, ArrayList<Contact> contacts) throws InterruptedException {
+        for (int i = 0; i < contacts.size(); i++) {
+            // if (contacts.get(i).getNombre().equals(name)) {
+            // Uso .contains para que te surgiera contactos que contengan el string
+            // ingresado.
+            if (contacts.get(i).getNombre().toLowerCase().contains(name)) {
+                System.out.println("\nNombre: " + contacts.get(i).getNombre() + "\n\n"
+                        + "Telefono: " + contacts.get(i).getNumero() + "\n");
+                System.out.println(contacts.get(i).getMail().isEmpty() ? "No tiene mail\n"
+                        : "Correo: " + contacts.get(i).getMail() + "\n");
+            } else {
+                if (i == contacts.size() - 1) {
+                    System.out.println("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"
+                            + "\n         El contacto " + name + " no existe"
+                            + "\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+                    Thread.sleep(1000);
+                }
             }
         }
     }
