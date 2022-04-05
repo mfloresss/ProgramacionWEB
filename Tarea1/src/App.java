@@ -42,12 +42,15 @@ public class App {
                         } while (!checkEmail(email));
 
                         contacts.add(new Contact(name, num, email));
+
                         System.out.println("\n> Contacto ingresado correctamente \n");
+
                         Thread.sleep(1000);
                     } else {
                         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"
                                 + "SE LLEGO AL LIMITES DE CONTACTOS PARA AGREGAR"
                                 + "\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+
                         Thread.sleep(1000);
                     }
                     break;
@@ -55,15 +58,15 @@ public class App {
                 case '2':
                     System.out.print("\n> Ingresa el nombre del contacto: ");
                     name = tec.nextLine().toLowerCase();
-                    getContact(name, contacts);
 
-                    Thread.sleep(1000);
+                    Contact.getContact(contacts, name);
                     break;
 
                 case '3':
                     System.out.println("==============================================\n\n"
                             + "               NOS VEMOS!!!\n\n"
                             + "==============================================");
+
                     Thread.sleep(1000);
                     break;
 
@@ -71,6 +74,7 @@ public class App {
                     System.out.println("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"
                             + "               OPCION INVALIDA"
                             + "\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
+
                     Thread.sleep(1000);
                     break;
             }
@@ -120,27 +124,6 @@ public class App {
             } else {
                 System.out.print("\n> Debe ingresar un numero valido: ");
                 return false;
-            }
-        }
-    }
-
-    public static void getContact(String name, ArrayList<Contact> contacts) throws InterruptedException {
-        for (int i = 0; i < contacts.size(); i++) {
-            // if (contacts.get(i).getNombre().equals(name)) {
-            // Uso .contains para que te surgiera contactos que contengan el string
-            // ingresado.
-            if (contacts.get(i).getNombre().toLowerCase().contains(name)) {
-                System.out.println("\nNombre: " + contacts.get(i).getNombre() + "\n\n"
-                        + "Telefono: " + contacts.get(i).getNumero() + "\n");
-                System.out.println(contacts.get(i).getMail().isEmpty() ? "No tiene mail\n"
-                        : "Correo: " + contacts.get(i).getMail() + "\n");
-            } else {
-                if (i == contacts.size() - 1) {
-                    System.out.println("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"
-                            + "\n         El contacto " + name + " no existe"
-                            + "\n\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
-                    Thread.sleep(1000);
-                }
             }
         }
     }
