@@ -6,7 +6,7 @@ public class Estacionamiento {
     
     // Cambiar los horarios si la consola tira que el estacionamiento esta cerrado
     private static final int HORARIO_ABRE = 7;
-    private static final int HORARIO_CIERRA = 8;
+    private static final int HORARIO_CIERRA = 23;
 
     private static int lugares;
     private static int precioIngreso;
