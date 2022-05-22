@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Estacionamiento {
     private static final int MAX_LUGARES = 8;
-    
+
     // Cambiar los horarios si la consola tira que el estacionamiento esta cerrado
     private static final int HORARIO_ABRE = 7;
     private static final int HORARIO_CIERRA = 23;
@@ -28,11 +28,11 @@ public class Estacionamiento {
                 Estacionamiento.lugares--;
                 lugaresOcupados.add(auto);
                 System.out.println(
-                        "===========     INGRESA     ===========\n" +
+                        "\n===========     INGRESA     ===========\n" +
                                 "Nombre: " + auto.getPersona().getNombre() +
                                 "\nNro de cuenta: " + auto.getPersona().getCuentaCorriente() +
                                 "\nAuto: " + auto.getMarca() +
-                                "\n========================================");
+                                "\n========================================\n");
             } else if (Estacionamiento.lugares > MAX_LUGARES) {
                 System.out.println(
                         "Nuestro estacionamiento permite " + Estacionamiento.MAX_LUGARES + " lugares, no "
@@ -53,11 +53,11 @@ public class Estacionamiento {
                     Estacionamiento.lugares++;
                     lugaresOcupados.remove(auto);
                     System.out.println(
-                            "=============     SALE     =============\n" +
+                            "\n=============     SALE     =============\n" +
                                     "Nombre: " + auto.getPersona().getNombre() +
                                     "\nNro de cuenta: " + auto.getPersona().getCuentaCorriente() +
                                     "\nAuto: " + auto.getMarca() +
-                                    "\n========================================");
+                                    "\n========================================\n");
                 } else {
                     System.out.println("El auto con la matricula: " + auto.getMatricula()
                             + " no se encuentra en el estacionamiento");
@@ -68,16 +68,16 @@ public class Estacionamiento {
         }
     }
 
-    public static void mostrarCuenta() {
+    public static void calcular() {
         if (Estacionamiento.lugaresOcupados.size() != 0) {
             for (int i = 0; i < Estacionamiento.lugaresOcupados.size(); i++) {
                 System.out.println(
-                        "=============     CUENTA     =============\n" +
+                        "\n=============     CUENTA     =============\n" +
                                 "Nombre: " + Estacionamiento.lugaresOcupados.get(i).getPersona().getNombre() +
                                 "\nNro de cuenta: "
                                 + Estacionamiento.lugaresOcupados.get(i).getPersona().getCuentaCorriente() +
                                 "\nAuto: " + Estacionamiento.lugaresOcupados.get(i).getMarca() +
-                                "\n========================================");
+                                "\n========================================\n");
             }
         } else {
             System.out.println("No hay autos para calcular, el estacionamiento esta vacio");
@@ -87,9 +87,11 @@ public class Estacionamiento {
     public static void nuevoDia() {
         if (Estacionamiento.lugaresOcupados.size() != 0) {
             for (int i = 0; i < Estacionamiento.lugaresOcupados.size(); i++) {
-                Estacionamiento.lugaresOcupados.get(i).getPersona()
-                        .setCuentaCorriente(
-                                Estacionamiento.lugaresOcupados.get(i).getPersona().getCuentaCorriente() + precioNoche);
+                Estacionamiento.lugaresOcupados.get(i).getPersona().setCuentaCorriente(
+                        Estacionamiento.lugaresOcupados.get(i).getPersona().getCuentaCorriente() + precioNoche);
+                System.out.println("\n===========     Nuevo dia     ==========\n" +
+                        "\nEl auto de " + Estacionamiento.lugaresOcupados.get(i).getPersona().getNombre()
+                        + " paso la noche\n" + "\n========================================\n");
             }
         } else {
             System.out.println("El estacionamiento esta vacio");

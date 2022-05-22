@@ -24,7 +24,6 @@ public class App {
 		Estacionamiento.entra(autoFelipe);
 		// Notar que no entra el auto, asi que no tiene ningun efecto
 
-		Estacionamiento.mostrarCuenta();
-		// Muestra la cuenta de las personas
+		Estacionamiento.calcular();
 	}
 }
